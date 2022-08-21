@@ -1,1 +1,1 @@
-# demo library
+# fluent errors
