@@ -1,4 +1,8 @@
-﻿using FluentErrors.Validation;
+﻿// <copyright file="TestModelValidator.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
+
+using FluentErrors.Validation;
 using FluentValidation;
 
 namespace FluentErrors.Tests.Validation
@@ -7,11 +11,11 @@ namespace FluentErrors.Tests.Validation
     {
         protected override void DefineModelValidity()
         {
-            RuleFor(m => m.Name)
+            this.RuleFor(m => m.Name)
                 .MinimumLength(3)
                 .WithMessage("Gimme a name");
 
-            RuleFor(m => m.Magnitude)
+            this.RuleFor(m => m.Magnitude)
                 .GreaterThan(12)
                 .WithMessage("Gimme some magnitude");
         }

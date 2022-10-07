@@ -1,12 +1,16 @@
-﻿using System;
-using System.Linq;
-using FluentErrors.Api.Models;
-using FluentErrors.Errors;
-using FluentErrors.Validation;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿// <copyright file="ErrorExtensions.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
 
 namespace FluentErrors.Api
 {
+    using System;
+    using System.Linq;
+    using FluentErrors.Api.Models;
+    using FluentErrors.Errors;
+    using FluentErrors.Validation;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+
     /// <summary>
     /// Error handling extensions.
     /// </summary>

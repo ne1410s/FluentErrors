@@ -1,4 +1,8 @@
-﻿using System.Runtime.Serialization;
+﻿// <copyright file="ErrorExtensionsTests.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
+
+using System.Runtime.Serialization;
 using FluentErrors.Api;
 using FluentErrors.Api.Models;
 using FluentErrors.Errors;
@@ -67,7 +71,7 @@ namespace FluentErrors.Tests.Api
         public void ToOutcome_GenericException_ConcealsOriginalMessage()
         {
             // Arrange
-            var ex = new Exception("secret corporate stuff");
+            var ex = new InvalidOperationException("secret corporate stuff");
             var expectedBody = new HttpErrorBody(ex.GetType().Name, "An unexpected error occurred");
             var expected = new HttpErrorOutcome(500, expectedBody);
 

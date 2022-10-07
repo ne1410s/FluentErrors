@@ -1,4 +1,8 @@
-﻿using FluentErrors.Errors;
+﻿// <copyright file="FluentValidatorTests.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
+
+using FluentErrors.Errors;
 using FluentErrors.Validation;
 
 namespace FluentErrors.Tests.Validation

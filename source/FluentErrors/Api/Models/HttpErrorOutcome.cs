@@ -1,4 +1,8 @@
-﻿namespace FluentErrors.Api.Models
+﻿// <copyright file="HttpErrorOutcome.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
+
+namespace FluentErrors.Api.Models
 {
     /// <summary>
     /// An http error outcome.
@@ -12,8 +16,8 @@
         /// <param name="errorBody">The error body.</param>
         public HttpErrorOutcome(int errorCode, HttpErrorBody errorBody)
         {
-            ErrorCode = errorCode;
-            ErrorBody = errorBody;
+            this.ErrorCode = errorCode;
+            this.ErrorBody = errorBody;
         }
 
         /// <summary>

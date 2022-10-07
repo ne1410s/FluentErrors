@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
-using FluentErrors.Validation;
+﻿// <copyright file="HttpErrorBody.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
 
 namespace FluentErrors.Api.Models
 {
+    using System.Collections.Generic;
+    using FluentErrors.Validation;
+
     /// <summary>
     /// Response returned from a unsuccessful http call.
     /// </summary>
@@ -16,9 +20,9 @@ namespace FluentErrors.Api.Models
         /// <param name="errors">Any invalid items associated.</param>
         public HttpErrorBody(string type, string message, IEnumerable<InvalidItem>? errors = null)
         {
-            Type = type;
-            Message = message;
-            Errors = errors;
+            this.Type = type;
+            this.Message = message;
+            this.Errors = errors;
         }
 
         /// <summary>

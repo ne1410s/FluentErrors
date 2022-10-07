@@ -1,10 +1,14 @@
-﻿using System.Linq;
-using FluentErrors.Errors;
-using FluentValidation;
-using FluentValidation.Results;
+﻿// <copyright file="FluentValidatorBase.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
 
 namespace FluentErrors.Validation
 {
+    using System.Linq;
+    using FluentErrors.Errors;
+    using FluentValidation;
+    using FluentValidation.Results;
+
     /// <summary>
     /// Validates a model of type <typeparamref name="T"/>.
     /// </summary>
@@ -17,13 +21,13 @@ namespace FluentErrors.Validation
         /// </summary>
         protected FluentValidatorBase()
         {
-            DefineModelValidity();
+            this.DefineModelValidity();
         }
 
         /// <inheritdoc/>
         public virtual void AssertValid(T item)
         {
-            ValidationResult result = Validate(item);
+            ValidationResult result = this.Validate(item);
             if (!result.IsValid)
             {
                 var errors = result.Errors

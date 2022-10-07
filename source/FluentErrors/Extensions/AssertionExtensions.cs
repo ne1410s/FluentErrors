@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using FluentErrors.Errors;
-using FluentErrors.Validation;
+﻿// <copyright file="AssertionExtensions.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
 
 namespace FluentErrors.Extensions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text.Json;
+    using FluentErrors.Errors;
+    using FluentErrors.Validation;
+
     /// <summary>
     /// Provides fluent semantics for raising pre-emptive exception types.
     /// </summary>
@@ -59,7 +63,8 @@ namespace FluentErrors.Extensions
         /// <param name="message">Used if the check fails.</param>
         /// <param name="unless">Exemption criteria.</param>
         /// <exception cref="DataStateError">Assertion failed.</exception>
-        public static void MustNotSerializeAs<T>(this T obj, T unexpected, string? message = null, Func<bool>? unless = null)
+        public static void MustNotSerializeAs<T>(
+            this T obj, T unexpected, string? message = null, Func<bool>? unless = null)
             where T : class
             => obj.SerializesAs(unexpected).MustBe(false, message, unless);
 

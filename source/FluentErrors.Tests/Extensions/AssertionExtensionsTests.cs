@@ -1,4 +1,9 @@
-﻿using FluentErrors.Errors;
+﻿// <copyright file="AssertionExtensionsTests.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
+
+using System.Globalization;
+using FluentErrors.Errors;
 using FluentErrors.Extensions;
 using FluentErrors.Tests.Validation;
 using FluentErrors.Validation;
@@ -6,7 +11,7 @@ using FluentErrors.Validation;
 namespace FluentErrors.Tests.Extensions
 {
     /// <summary>
-    /// Tests for the <see cref="AssertionExtensions"/> class.
+    /// Tests for the <see cref="FluentErrors.Extensions.AssertionExtensions"/> class.
     /// </summary>
     public class AssertionExtensionsTests
     {
@@ -340,7 +345,7 @@ namespace FluentErrors.Tests.Extensions
         {
             // Arrange
             var date1 = new DateTime(1985, 10, 26);
-            var date2 = DateTime.Parse("1985/10/26").Date.AddHours(1);
+            var date2 = DateTime.Parse("1985/10/26", CultureInfo.InvariantCulture).Date.AddHours(1);
 
             // Act
             var act = () => date1.MustNotBe(date2);
@@ -354,7 +359,7 @@ namespace FluentErrors.Tests.Extensions
         {
             // Arrange
             var date1 = new DateTime(1985, 10, 26);
-            var date2 = DateTime.Parse("1985/10/26").Date.AddHours(0);
+            var date2 = DateTime.Parse("1985/10/26", CultureInfo.InvariantCulture).Date.AddHours(0);
 
             // Act
             var act = () => date1.MustNotBe(date2);
@@ -519,7 +524,6 @@ namespace FluentErrors.Tests.Extensions
             // Assert
             act.Should().ThrowExactly<AuthorisationError>();
         }
-
 
         [Fact]
         public void MustBeAllowed_NotAllowedNoMessage_ExceptionContainsDefaultMessage()

@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
-using FluentErrors.Validation;
+﻿// <copyright file="ValidationError.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
 
 namespace FluentErrors.Errors
 {
+    using System.Collections.Generic;
+    using FluentErrors.Validation;
+
     /// <summary>
     /// Represents errors occuring during validation.
     /// </summary>
@@ -13,9 +17,10 @@ namespace FluentErrors.Errors
         /// class.
         /// </summary>
         /// <param name="invalidItems">Invalid items.</param>
-        public ValidationError(params InvalidItem[] invalidItems) : base("Invalid instance received.")
+        public ValidationError(params InvalidItem[] invalidItems)
+            : base("Invalid instance received.")
         {
-            InvalidItems = invalidItems;
+            this.InvalidItems = invalidItems;
         }
 
         /// <summary>

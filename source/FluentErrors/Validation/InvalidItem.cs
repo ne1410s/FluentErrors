@@ -1,4 +1,8 @@
-﻿namespace FluentErrors.Validation
+﻿// <copyright file="InvalidItem.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
+
+namespace FluentErrors.Validation
 {
     /// <summary>
     /// Represents an invalid item.
@@ -13,9 +17,9 @@
         /// <param name="attemptedValue">The attempted value.</param>
         public InvalidItem(string property, string errorMessage, object? attemptedValue)
         {
-            Property = property;
-            ErrorMessage = errorMessage;
-            AttemptedValue = attemptedValue;
+            this.Property = property;
+            this.ErrorMessage = errorMessage;
+            this.AttemptedValue = attemptedValue;
         }
 
         /// <summary>

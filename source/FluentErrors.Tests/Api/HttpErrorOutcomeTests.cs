@@ -1,4 +1,8 @@
-﻿using FluentErrors.Api.Models;
+﻿// <copyright file="HttpErrorOutcomeTests.cs" company="ne1410s">
+// Copyright (c) ne1410s. All rights reserved.
+// </copyright>
+
+using FluentErrors.Api.Models;
 
 namespace FluentErrors.Tests.Api
 {
