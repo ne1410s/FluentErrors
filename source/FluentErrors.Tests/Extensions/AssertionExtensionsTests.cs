@@ -447,6 +447,19 @@ namespace FluentErrors.Tests.Extensions
         }
 
         [Fact]
+        public void MustAdhereTo_NullValidator_ThrowsException()
+        {
+            // Arrange
+            var model = new TestModel();
+
+            // Act
+            var act = () => model.MustAdhereTo(null!);
+
+            // Assert
+            act.Should().ThrowExactly<ArgumentNullException>();
+        }
+
+        [Fact]
         public void MustExist_IsDefault_ThrowsResourceMissingError()
         {
             // Arrange

@@ -22,6 +22,10 @@ namespace FluentErrors.Validation
             "Critical Code Smell",
             "S1699:Constructors should only call non-overridable methods",
             Justification = "Existing mechanism")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Usage",
+            "CA2214:Do not call overridable methods in constructors",
+            Justification = "Existing mechanism")]
         protected FluentValidatorBase()
         {
             this.DefineModelValidity();

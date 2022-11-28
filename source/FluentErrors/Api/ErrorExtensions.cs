@@ -23,7 +23,7 @@ namespace FluentErrors.Api
         /// <returns>The outcome.</returns>
         public static HttpErrorOutcome ToOutcome(this Exception ex)
         {
-            var errorCode = ex.ToErrorCode();
+            var errorCode = (ex ?? throw new ArgumentNullException(nameof(ex))).ToErrorCode();
             var errorMessage = errorCode == 500 ? "An unexpected error occurred" : ex.Message;
             var invalidItems = ex is ValidatingException valEx ? valEx.InvalidItems : null;
 

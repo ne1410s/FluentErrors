@@ -106,7 +106,7 @@ namespace FluentErrors.Extensions
         {
             if (unless?.Invoke() != true)
             {
-                validator.AssertValid(obj);
+                (validator ?? throw new ArgumentNullException(nameof(validator))).AssertValid(obj);
             }
         }
 

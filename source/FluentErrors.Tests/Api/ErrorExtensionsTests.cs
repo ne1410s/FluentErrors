@@ -115,5 +115,19 @@ namespace FluentErrors.Tests.Api
             // Assert
             actual.Should().BeEquivalentTo(expected);
         }
+
+
+        [Fact]
+        public void ToOutcome_NullException_ThrowsException()
+        {
+            // Arrange
+            var nullException = (DataStateException)null!;
+
+            // Act
+            var act = nullException.ToOutcome;
+
+            // Assert
+            act.Should().ThrowExactly<ArgumentNullException>();
+        }
     }
 }
