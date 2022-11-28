@@ -23,7 +23,7 @@ namespace FluentErrors.Extensions
         /// <param name="obj">The object.</param>
         /// <param name="message">Used if the check fails.</param>
         /// <param name="unless">Exemption criteria.</param>
-        /// <exception cref="DataStateError">Assertion failed.</exception>
+        /// <exception cref="DataStateException">Assertion failed.</exception>
         public static void MustBeUnpopulated<T>(this T obj, string? message = null, Func<bool>? unless = null)
             => obj.IsDefault().MustBe(true, message, unless);
 
@@ -35,7 +35,7 @@ namespace FluentErrors.Extensions
         /// <param name="obj">The object.</param>
         /// <param name="message">Used if the check fails.</param>
         /// <param name="unless">Exemption criteria.</param>
-        /// <exception cref="DataStateError">Assertion failed.</exception>
+        /// <exception cref="DataStateException">Assertion failed.</exception>
         public static void MustBePopulated<T>(this T obj, string? message = null, Func<bool>? unless = null)
             => obj.IsDefault().MustBe(false, message, unless);
 
@@ -48,7 +48,7 @@ namespace FluentErrors.Extensions
         /// <param name="expected">The expected value.</param>
         /// <param name="message">Used if the check fails.</param>
         /// <param name="unless">Exemption criteria.</param>
-        /// <exception cref="DataStateError">Assertion failed.</exception>
+        /// <exception cref="DataStateException">Assertion failed.</exception>
         public static void MustSerializeAs<T>(this T obj, T expected, string? message = null, Func<bool>? unless = null)
             where T : class
             => obj.SerializesAs(expected).MustBe(true, message, unless);
@@ -62,7 +62,7 @@ namespace FluentErrors.Extensions
         /// <param name="unexpected">An unexpected value.</param>
         /// <param name="message">Used if the check fails.</param>
         /// <param name="unless">Exemption criteria.</param>
-        /// <exception cref="DataStateError">Assertion failed.</exception>
+        /// <exception cref="DataStateException">Assertion failed.</exception>
         public static void MustNotSerializeAs<T>(
             this T obj, T unexpected, string? message = null, Func<bool>? unless = null)
             where T : class
@@ -76,7 +76,7 @@ namespace FluentErrors.Extensions
         /// <param name="unexpected">An unexpected value.</param>
         /// <param name="message">Used if the check fails.</param>
         /// <param name="unless">Exemption criteria.</param>
-        /// <exception cref="DataStateError">Assertion failed.</exception>
+        /// <exception cref="DataStateException">Assertion failed.</exception>
         public static void MustNotBe<T>(this T obj, T unexpected, string? message = null, Func<bool>? unless = null)
             where T : struct
             => Equals(obj, unexpected).MustBe(false, message, unless);
@@ -89,7 +89,7 @@ namespace FluentErrors.Extensions
         /// <param name="expected">The expected value.</param>
         /// <param name="message">Used if the check fails.</param>
         /// <param name="unless">Exemption criteria.</param>
-        /// <exception cref="DataStateError">Assertion failed.</exception>
+        /// <exception cref="DataStateException">Assertion failed.</exception>
         public static void MustBe<T>(this T obj, T expected, string? message = null, Func<bool>? unless = null)
             where T : struct
             => Equals(obj, expected).MustBeInGoodState(message, unless);
@@ -101,7 +101,7 @@ namespace FluentErrors.Extensions
         /// <param name="obj">The object.</param>
         /// <param name="validator">The validator.</param>
         /// <param name="unless">Exemption criteria.</param>
-        /// <exception cref="ValidationError">Assertion failed.</exception>
+        /// <exception cref="ValidatingException">Assertion failed.</exception>
         public static void MustAdhereTo<T>(this T obj, IItemValidator<T> validator, Func<bool>? unless = null)
         {
             if (unless?.Invoke() != true)
@@ -117,12 +117,12 @@ namespace FluentErrors.Extensions
         /// <param name="obj">The object.</param>
         /// <param name="message">Used if the check fails.</param>
         /// <param name="unless">Exemption criteria.</param>
-        /// <exception cref="ResourceMissingError">Assertion failed.</exception>
+        /// <exception cref="ResourceMissingException">Assertion failed.</exception>
         public static void MustExist<T>(this T obj, string? message = null, Func<bool>? unless = null)
         {
             if (unless?.Invoke() != true && obj.IsDefault())
             {
-                throw new ResourceMissingError(message);
+                throw new ResourceMissingException(message);
             }
         }
 
@@ -132,12 +132,12 @@ namespace FluentErrors.Extensions
         /// <param name="allowed">Whether an operation is allowed.</param>
         /// <param name="message">Used if the check fails.</param>
         /// <param name="unless">Exemption criteria.</param>
-        /// <exception cref="AuthorisationError">Assertion failed.</exception>
+        /// <exception cref="AuthorisationException">Assertion failed.</exception>
         public static void MustBeAllowed(this bool allowed, string? message = null, Func<bool>? unless = null)
         {
             if (unless?.Invoke() != true && !allowed)
             {
-                throw new AuthorisationError(message);
+                throw new AuthorisationException(message);
             }
         }
 
@@ -147,12 +147,12 @@ namespace FluentErrors.Extensions
         /// <param name="inGoodState">Whether state is considered good.</param>
         /// <param name="message">Used if the check fails.</param>
         /// <param name="unless">Exemption criteria.</param>
-        /// <exception cref="DataStateError">Assertion failed.</exception>
+        /// <exception cref="DataStateException">Assertion failed.</exception>
         private static void MustBeInGoodState(this bool inGoodState, string? message, Func<bool>? unless = null)
         {
             if (unless?.Invoke() != true && !inGoodState)
             {
-                throw new DataStateError(message);
+                throw new DataStateException(message);
             }
         }
 

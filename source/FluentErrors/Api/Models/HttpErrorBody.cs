@@ -13,7 +13,7 @@ namespace FluentErrors.Api.Models
     public class HttpErrorBody
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="HttpErrorBody"/> class.
+        /// Initializes a new instance of the <see cref="HttpErrorBody"/> class.
         /// </summary>
         /// <param name="type">The error type.</param>
         /// <param name="message">The error message.</param>

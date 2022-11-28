@@ -25,7 +25,7 @@ namespace FluentErrors.Api
         {
             var errorCode = ex.ToErrorCode();
             var errorMessage = errorCode == 500 ? "An unexpected error occurred" : ex.Message;
-            var invalidItems = ex is ValidationError valEx ? valEx.InvalidItems : null;
+            var invalidItems = ex is ValidatingException valEx ? valEx.InvalidItems : null;
 
             return new HttpErrorOutcome(
                 errorCode,
@@ -50,10 +50,10 @@ namespace FluentErrors.Api
         /// <returns>An http error code.</returns>
         public static int ToErrorCode(this Exception ex) => ex switch
         {
-            StaticValidationError _ => 400,
-            AuthorisationError _ => 403,
-            ResourceMissingError _ => 404,
-            ServiceOrchestrationError _ => 422,
+            StaticValidationException _ => 400,
+            AuthorisationException _ => 403,
+            ResourceMissingException _ => 404,
+            ServiceOrchestrationException _ => 422,
             _ => 500,
         };
     }

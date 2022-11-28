@@ -1,4 +1,4 @@
-﻿// <copyright file="ServiceOrchestrationError.cs" company="ne1410s">
+﻿// <copyright file="ServiceOrchestrationException.cs" company="ne1410s">
 // Copyright (c) ne1410s. All rights reserved.
 // </copyright>
 
@@ -9,13 +9,13 @@ namespace FluentErrors.Errors
     /// <summary>
     /// Represents errors occuring in general domain processing.
     /// </summary>
-    public class ServiceOrchestrationError : Exception
+    public class ServiceOrchestrationException : Exception
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="ServiceOrchestrationError"/> class.
+        /// Initializes a new instance of the <see cref="ServiceOrchestrationException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public ServiceOrchestrationError(string? message)
+        public ServiceOrchestrationException(string? message)
             : base(message)
         { }
     }

@@ -1,4 +1,4 @@
-﻿// <copyright file="ValidationError.cs" company="ne1410s">
+﻿// <copyright file="ValidatingException.cs" company="ne1410s">
 // Copyright (c) ne1410s. All rights reserved.
 // </copyright>
 
@@ -10,14 +10,14 @@ namespace FluentErrors.Errors
     /// <summary>
     /// Represents errors occuring during validation.
     /// </summary>
-    public class ValidationError : ServiceOrchestrationError
+    public class ValidatingException : ServiceOrchestrationException
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="ValidationError"/>
+        /// Initializes a new instance of the <see cref="ValidatingException"/>
         /// class.
         /// </summary>
         /// <param name="invalidItems">Invalid items.</param>
-        public ValidationError(params InvalidItem[] invalidItems)
+        public ValidatingException(params InvalidItem[] invalidItems)
             : base("Invalid instance received.")
         {
             this.InvalidItems = invalidItems;

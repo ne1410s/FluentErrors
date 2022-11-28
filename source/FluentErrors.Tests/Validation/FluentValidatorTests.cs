@@ -25,7 +25,7 @@ namespace FluentErrors.Tests.Validation
             var act = () => validator.AssertValid(model);
 
             // Assert
-            act.Should().ThrowExactly<ValidationError>()
+            act.Should().ThrowExactly<ValidatingException>()
                 .WithMessage("Invalid instance received.")
                 .Which.InvalidItems
                 .Should().BeEquivalentTo(expectedItems);

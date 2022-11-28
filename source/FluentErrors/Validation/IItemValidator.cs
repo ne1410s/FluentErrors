@@ -10,13 +10,13 @@ namespace FluentErrors.Validation
     /// Validates an item.
     /// </summary>
     /// <typeparam name="TItem">The item type.</typeparam>
-    public interface IItemValidator<TItem>
+    public interface IItemValidator<in TItem>
     {
         /// <summary>
         /// Validates an item.
         /// </summary>
         /// <param name="item">The item to validate.</param>
-        /// <exception cref="ValidationError">Invalid data.</exception>
+        /// <exception cref="ValidatingException">Invalid data.</exception>
         public void AssertValid(TItem item);
     }
 }

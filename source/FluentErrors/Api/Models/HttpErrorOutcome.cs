@@ -10,7 +10,7 @@ namespace FluentErrors.Api.Models
     public class HttpErrorOutcome
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="HttpErrorOutcome"/> class.
+        /// Initializes a new instance of the <see cref="HttpErrorOutcome"/> class.
         /// </summary>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorBody">The error body.</param>

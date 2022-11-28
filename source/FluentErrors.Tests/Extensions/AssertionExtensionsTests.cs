@@ -38,7 +38,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => testObj.MustBePopulated();
 
             // Assert
-            act.Should().ThrowExactly<DataStateError>();
+            act.Should().ThrowExactly<DataStateException>();
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace FluentErrors.Tests.Extensions
         public void MustBePopulated_PopulatedAndExempt_DoesNotThrow()
         {
             // Arrange
-            const string testObj = null!;
+            const string testObj = "hello";
 
             // Act
             var act = () => testObj.MustBePopulated(unless: () => true);
@@ -91,7 +91,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => testObj.MustBePopulated();
 
             // Assert
-            act.Should().ThrowExactly<DataStateError>();
+            act.Should().ThrowExactly<DataStateException>();
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => testObj.MustBeUnpopulated();
 
             // Assert
-            act.Should().ThrowExactly<DataStateError>();
+            act.Should().ThrowExactly<DataStateException>();
         }
 
         [Fact]
@@ -198,7 +198,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => object1.MustSerializeAs(object2);
 
             // Assert
-            act.Should().Throw<DataStateError>();
+            act.Should().Throw<DataStateException>();
         }
 
         [Fact]
@@ -213,7 +213,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => object1.MustSerializeAs(object2, message);
 
             // Assert
-            act.Should().Throw<DataStateError>().WithMessage(message);
+            act.Should().Throw<DataStateException>().WithMessage(message);
         }
 
         [Fact]
@@ -255,7 +255,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => object1.MustNotSerializeAs(object2);
 
             // Assert
-            act.Should().Throw<DataStateError>();
+            act.Should().Throw<DataStateException>();
         }
 
         [Fact]
@@ -270,7 +270,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => object1.MustNotSerializeAs(object2, message);
 
             // Assert
-            act.Should().Throw<DataStateError>().WithMessage(message);
+            act.Should().Throw<DataStateException>().WithMessage(message);
         }
 
         [Fact]
@@ -310,7 +310,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => value.MustBe(2 + 2);
 
             // Assert
-            act.Should().ThrowExactly<DataStateError>();
+            act.Should().ThrowExactly<DataStateException>();
         }
 
         [Fact]
@@ -324,7 +324,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => value.MustBe(2 + 2, message);
 
             // Assert
-            act.Should().ThrowExactly<DataStateError>().WithMessage(message);
+            act.Should().ThrowExactly<DataStateException>().WithMessage(message);
         }
 
         [Fact]
@@ -365,7 +365,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => date1.MustNotBe(date2);
 
             // Assert
-            act.Should().ThrowExactly<DataStateError>();
+            act.Should().ThrowExactly<DataStateException>();
         }
 
         [Fact]
@@ -380,7 +380,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => date1.MustNotBe(date2, message);
 
             // Assert
-            act.Should().ThrowExactly<DataStateError>().WithMessage(message);
+            act.Should().ThrowExactly<DataStateException>().WithMessage(message);
         }
 
         [Fact]
@@ -419,13 +419,13 @@ namespace FluentErrors.Tests.Extensions
             var mockValidator = new Mock<IItemValidator<TestModel>>();
             mockValidator
                 .Setup(m => m.AssertValid(It.IsAny<TestModel>()))
-                .Throws(new ValidationError());
+                .Throws(new ValidatingException());
 
             // Act
             var act = () => model.MustAdhereTo(mockValidator.Object);
 
             // Assert
-            act.Should().ThrowExactly<ValidationError>()
+            act.Should().ThrowExactly<ValidatingException>()
                 .WithMessage("Invalid instance received.");
         }
 
@@ -437,7 +437,7 @@ namespace FluentErrors.Tests.Extensions
             var mockValidator = new Mock<IItemValidator<TestModel>>();
             mockValidator
                 .Setup(m => m.AssertValid(It.IsAny<TestModel>()))
-                .Throws(new ValidationError());
+                .Throws(new ValidatingException());
 
             // Act
             var act = () => model.MustAdhereTo(mockValidator.Object, () => true);
@@ -456,7 +456,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => testObj.MustExist();
 
             // Assert
-            act.Should().ThrowExactly<ResourceMissingError>();
+            act.Should().ThrowExactly<ResourceMissingException>();
         }
 
         [Fact]
@@ -522,7 +522,7 @@ namespace FluentErrors.Tests.Extensions
             var act = () => isAllowed.MustBeAllowed();
 
             // Assert
-            act.Should().ThrowExactly<AuthorisationError>();
+            act.Should().ThrowExactly<AuthorisationException>();
         }
 
         [Fact]

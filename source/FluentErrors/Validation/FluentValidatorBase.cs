@@ -5,7 +5,6 @@
 namespace FluentErrors.Validation
 {
     using System.Linq;
-    using FluentErrors.Errors;
     using FluentValidation;
     using FluentValidation.Results;
 
@@ -16,9 +15,13 @@ namespace FluentErrors.Validation
     public abstract class FluentValidatorBase<T> : AbstractValidator<T>, IItemValidator<T>
     {
         /// <summary>
-        /// Initialises a new instance of the
+        /// Initializes a new instance of the
         /// <see cref="FluentValidatorBase{T}"/> class.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Critical Code Smell",
+            "S1699:Constructors should only call non-overridable methods",
+            Justification = "Existing mechanism")]
         protected FluentValidatorBase()
         {
             this.DefineModelValidity();
@@ -34,7 +37,7 @@ namespace FluentErrors.Validation
                     .Select(e => new InvalidItem(e.PropertyName, e.ErrorMessage, e.AttemptedValue))
                     .ToArray();
 
-                throw new ValidationError(errors);
+                throw new Errors.ValidatingException(errors);
             }
         }
 

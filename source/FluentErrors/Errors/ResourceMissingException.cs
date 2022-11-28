@@ -1,4 +1,4 @@
-﻿// <copyright file="ResourceMissingError.cs" company="ne1410s">
+﻿// <copyright file="ResourceMissingException.cs" company="ne1410s">
 // Copyright (c) ne1410s. All rights reserved.
 // </copyright>
 
@@ -7,14 +7,14 @@ namespace FluentErrors.Errors
     /// <summary>
     /// Missing resource errors.
     /// </summary>
-    public class ResourceMissingError : DataStateError
+    public class ResourceMissingException : DataStateException
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="ResourceMissingError"/>
+        /// Initializes a new instance of the <see cref="ResourceMissingException"/>
         /// class.
         /// </summary>
         /// <param name="message">A description of the exception.</param>
-        public ResourceMissingError(string? message = null)
+        public ResourceMissingException(string? message = null)
             : base(message ?? "Resource not found")
         { }
     }

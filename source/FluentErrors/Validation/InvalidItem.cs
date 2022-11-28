@@ -10,7 +10,7 @@ namespace FluentErrors.Validation
     public class InvalidItem
     {
         /// <summary>
-        /// Initialises a new instance of the <see cref="InvalidItem"/> class.
+        /// Initializes a new instance of the <see cref="InvalidItem"/> class.
         /// </summary>
         /// <param name="property">The property name.</param>
         /// <param name="errorMessage">The error message.</param>

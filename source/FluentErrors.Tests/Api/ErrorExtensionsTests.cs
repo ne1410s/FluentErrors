@@ -14,12 +14,12 @@ namespace FluentErrors.Tests.Api
     public class ErrorExtensionsTests
     {
         [Theory]
-        [InlineData(typeof(StaticValidationError), 400)]
-        [InlineData(typeof(AuthorisationError), 403)]
-        [InlineData(typeof(ResourceMissingError), 404)]
-        [InlineData(typeof(DataStateError), 422)]
-        [InlineData(typeof(ValidationError), 422)]
-        [InlineData(typeof(ServiceOrchestrationError), 422)]
+        [InlineData(typeof(StaticValidationException), 400)]
+        [InlineData(typeof(AuthorisationException), 403)]
+        [InlineData(typeof(ResourceMissingException), 404)]
+        [InlineData(typeof(DataStateException), 422)]
+        [InlineData(typeof(ValidatingException), 422)]
+        [InlineData(typeof(ServiceOrchestrationException), 422)]
         [InlineData(typeof(Exception), 500)]
         public void ToErrorCode_VaryingException_ReturnsExpectedCode(Type errorType, int expected)
         {
@@ -71,7 +71,7 @@ namespace FluentErrors.Tests.Api
         public void ToOutcome_GenericException_ConcealsOriginalMessage()
         {
             // Arrange
-            var ex = new InvalidOperationException("secret corporate stuff");
+            var ex = new Exception("secret corporate stuff");
             var expectedBody = new HttpErrorBody(ex.GetType().Name, "An unexpected error occurred");
             var expected = new HttpErrorOutcome(500, expectedBody);
 
@@ -86,7 +86,7 @@ namespace FluentErrors.Tests.Api
         public void ToOutcome_SupportedError_RelaysOriginalMessage()
         {
             // Arrange
-            var ex = new DataStateError("innocuous stuff");
+            var ex = new DataStateException("innocuous stuff");
             var expectedBody = new HttpErrorBody(ex.GetType().Name, ex.Message);
             var expected = new HttpErrorOutcome(422, expectedBody);
 
@@ -105,7 +105,7 @@ namespace FluentErrors.Tests.Api
             {
                 new InvalidItem("MyProp", "no good", 3),
             };
-            var ex = new StaticValidationError(errors);
+            var ex = new StaticValidationException(errors);
             var expectedBody = new HttpErrorBody(ex.GetType().Name, ex.Message, errors);
             var expected = new HttpErrorOutcome(400, expectedBody);
 
