@@ -116,7 +116,6 @@ namespace FluentErrors.Tests.Api
             actual.Should().BeEquivalentTo(expected);
         }
 
-
         [Fact]
         public void ToOutcome_NullException_ThrowsException()
         {
