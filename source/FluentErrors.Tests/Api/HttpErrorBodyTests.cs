@@ -2,25 +2,24 @@
 // Copyright (c) ne1410s. All rights reserved.
 // </copyright>
 
+namespace FluentErrors.Tests.Api;
+
 using FluentErrors.Api.Models;
 
-namespace FluentErrors.Tests.Api
+public class HttpErrorBodyTests
 {
-    public class HttpErrorBodyTests
+    [Fact]
+    public void Ctor_WithProperties_RetainsValues()
     {
-        [Fact]
-        public void Ctor_WithProperties_RetainsValues()
-        {
-            // Arrange
-            const string type = "mytype";
-            const string message = "mymessage";
+        // Arrange
+        const string type = "mytype";
+        const string message = "mymessage";
 
-            // Act
-            var result = new HttpErrorBody(type, message);
+        // Act
+        var result = new HttpErrorBody(type, message);
 
-            // Assert
-            result.Type.Should().Be(type);
-            result.Message.Should().Be(message);
-        }
+        // Assert
+        result.Type.Should().Be(type);
+        result.Message.Should().Be(message);
     }
 }

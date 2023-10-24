@@ -2,12 +2,11 @@
 // Copyright (c) ne1410s. All rights reserved.
 // </copyright>
 
-namespace FluentErrors.Tests.Validation
-{
-    public class TestModel
-    {
-        public string? Name { get; set; }
+namespace FluentErrors.Tests.Validation;
 
-        public int Magnitude { get; set; }
-    }
+public class TestModel
+{
+    public string? Name { get; set; }
+
+    public int Magnitude { get; set; }
 }

@@ -2,22 +2,21 @@
 // Copyright (c) ne1410s. All rights reserved.
 // </copyright>
 
+namespace FluentErrors.Tests.Validation;
+
 using FluentErrors.Validation;
 using FluentValidation;
 
-namespace FluentErrors.Tests.Validation
+public class TestModelValidator : FluentValidatorBase<TestModel>
 {
-    public class TestModelValidator : FluentValidatorBase<TestModel>
+    protected override void DefineModelValidity()
     {
-        protected override void DefineModelValidity()
-        {
-            this.RuleFor(m => m.Name)
-                .MinimumLength(3)
-                .WithMessage("Gimme a name");
+        this.RuleFor(m => m.Name)
+            .MinimumLength(3)
+            .WithMessage("Gimme a name");
 
-            this.RuleFor(m => m.Magnitude)
-                .GreaterThan(12)
-                .WithMessage("Gimme some magnitude");
-        }
+        this.RuleFor(m => m.Magnitude)
+            .GreaterThan(12)
+            .WithMessage("Gimme some magnitude");
     }
 }
