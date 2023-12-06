@@ -460,13 +460,26 @@ public class AssertionExtensionsTests
     }
 
     [Fact]
-    public void MustExist_IsDefault_ThrowsResourceMissingError()
+    public void MustExist_IsNull_ThrowsResourceMissingError()
     {
         // Arrange
         TestModel testObj = null!;
 
         // Act
         var act = () => testObj.MustExist();
+
+        // Assert
+        act.Should().ThrowExactly<ResourceMissingException>();
+    }
+
+    [Fact]
+    public void MustExist_IsDefault_ThrowsResourceMissingError()
+    {
+        // Arrange
+        const int testVal = 0;
+
+        // Act
+        var act = () => testVal.MustExist();
 
         // Assert
         act.Should().ThrowExactly<ResourceMissingException>();

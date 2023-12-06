@@ -36,7 +36,7 @@ public class ErrorExtensionsTests
     public void ToOutcome_GenericException_ConcealsOriginalMessage()
     {
         // Arrange
-        var ex = new Exception("secret corporate stuff");
+        var ex = new ArithmeticException("secret corporate stuff");
         var expectedBody = new HttpErrorBody(ex.GetType().Name, "An unexpected error occurred");
         var expected = new HttpErrorOutcome(500, expectedBody);
 
