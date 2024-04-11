@@ -23,9 +23,13 @@ public static class AssertionExtensions
     /// <param name="obj">The object.</param>
     /// <param name="message">Used if the check fails.</param>
     /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated object, for call chaining.</returns>
     /// <exception cref="DataStateException">Assertion failed.</exception>
-    public static void MustBeUnpopulated<T>(this T obj, string? message = null, Func<bool>? unless = null)
-        => obj.IsDefault().MustBe(true, message, unless);
+    public static T MustBeUnpopulated<T>(this T obj, string? message = null, Func<bool>? unless = null)
+    {
+        obj.IsDefault().MustBe(true, message, unless);
+        return obj;
+    }
 
     /// <summary>
     /// Asserts that an instance must not be a default value (or a null
@@ -35,9 +39,13 @@ public static class AssertionExtensions
     /// <param name="obj">The object.</param>
     /// <param name="message">Used if the check fails.</param>
     /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated object, for call chaining.</returns>
     /// <exception cref="DataStateException">Assertion failed.</exception>
-    public static void MustBePopulated<T>(this T obj, string? message = null, Func<bool>? unless = null)
-        => (obj == null || obj.IsDefault()).MustBe(false, message, unless);
+    public static T MustBePopulated<T>(this T obj, string? message = null, Func<bool>? unless = null)
+    {
+        obj.IsDefault().MustBe(false, message, unless);
+        return obj;
+    }
 
     /// <summary>
     /// Asserts that a reference must be equivalent to another, by way of
@@ -48,10 +56,14 @@ public static class AssertionExtensions
     /// <param name="expected">The expected value.</param>
     /// <param name="message">Used if the check fails.</param>
     /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated object, for call chaining.</returns>
     /// <exception cref="DataStateException">Assertion failed.</exception>
-    public static void MustSerializeAs<T>(this T obj, T expected, string? message = null, Func<bool>? unless = null)
+    public static T MustSerializeAs<T>(this T obj, T expected, string? message = null, Func<bool>? unless = null)
         where T : class
-        => obj.SerializesAs(expected).MustBe(true, message, unless);
+    {
+        obj.SerializesAs(expected).MustBe(true, message, unless);
+        return obj;
+    }
 
     /// <summary>
     /// Asserts that a reference must not be equivalent to another, by way of
@@ -62,11 +74,15 @@ public static class AssertionExtensions
     /// <param name="unexpected">An unexpected value.</param>
     /// <param name="message">Used if the check fails.</param>
     /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated object, for call chaining.</returns>
     /// <exception cref="DataStateException">Assertion failed.</exception>
-    public static void MustNotSerializeAs<T>(
+    public static T MustNotSerializeAs<T>(
         this T obj, T unexpected, string? message = null, Func<bool>? unless = null)
         where T : class
-        => obj.SerializesAs(unexpected).MustBe(false, message, unless);
+    {
+        obj.SerializesAs(unexpected).MustBe(false, message, unless);
+        return obj;
+    }
 
     /// <summary>
     /// Asserts that a value must not match an unexpected value.
@@ -76,10 +92,14 @@ public static class AssertionExtensions
     /// <param name="unexpected">An unexpected value.</param>
     /// <param name="message">Used if the check fails.</param>
     /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated object, for call chaining.</returns>
     /// <exception cref="DataStateException">Assertion failed.</exception>
-    public static void MustNotBe<T>(this T obj, T unexpected, string? message = null, Func<bool>? unless = null)
+    public static T MustNotBe<T>(this T obj, T unexpected, string? message = null, Func<bool>? unless = null)
         where T : struct
-        => Equals(obj, unexpected).MustBe(false, message, unless);
+    {
+        Equals(obj, unexpected).MustBe(false, message, unless);
+        return obj;
+    }
 
     /// <summary>
     /// Asserts that a value must match the expected value.
@@ -89,10 +109,14 @@ public static class AssertionExtensions
     /// <param name="expected">The expected value.</param>
     /// <param name="message">Used if the check fails.</param>
     /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated object, for call chaining.</returns>
     /// <exception cref="DataStateException">Assertion failed.</exception>
-    public static void MustBe<T>(this T obj, T expected, string? message = null, Func<bool>? unless = null)
+    public static T MustBe<T>(this T obj, T expected, string? message = null, Func<bool>? unless = null)
         where T : struct
-        => Equals(obj, expected).MustBeInGoodState(message, unless);
+    {
+        Equals(obj, expected).MustBeInGoodState(message, unless);
+        return obj;
+    }
 
     /// <summary>
     /// Asserts that an object passes the supplied validation criteria.
@@ -101,13 +125,16 @@ public static class AssertionExtensions
     /// <param name="obj">The object.</param>
     /// <param name="validator">The validator.</param>
     /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated object, for call chaining.</returns>
     /// <exception cref="ValidatingException">Assertion failed.</exception>
-    public static void MustAdhereTo<T>(this T obj, IItemValidator<T> validator, Func<bool>? unless = null)
+    public static T MustAdhereTo<T>(this T obj, IItemValidator<T> validator, Func<bool>? unless = null)
     {
         if (unless?.Invoke() != true)
         {
             (validator ?? throw new ArgumentNullException(nameof(validator))).AssertValid(obj);
         }
+
+        return obj;
     }
 
     /// <summary>
@@ -117,14 +144,12 @@ public static class AssertionExtensions
     /// <param name="obj">The object.</param>
     /// <param name="message">Used if the check fails.</param>
     /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated object, for call chaining.</returns>
     /// <exception cref="ResourceMissingException">Assertion failed.</exception>
-    public static void MustExist<T>(this T obj, string? message = null, Func<bool>? unless = null)
-    {
-        if (unless?.Invoke() != true && (obj == null || obj.IsDefault()))
-        {
-            throw new ResourceMissingException(message);
-        }
-    }
+    public static T MustExist<T>(this T obj, string? message = null, Func<bool>? unless = null)
+        => (unless?.Invoke() != true && obj.IsDefault())
+            ? throw new ResourceMissingException(message)
+            : obj;
 
     /// <summary>
     /// Asserts that an operation is authorised.
@@ -164,8 +189,7 @@ public static class AssertionExtensions
     /// <typeparam name="T">The object type.</typeparam>
     /// <param name="obj">The object.</param>
     /// <returns>Whether the object is default.</returns>
-    private static bool IsDefault<T>(this T obj)
-        => obj == null || EqualityComparer<T>.Default.Equals(obj, default!);
+    private static bool IsDefault<T>(this T obj) => Equals(obj, default(T));
 
     /// <summary>
     /// Compares resulting strings following default serialization.
