@@ -5,7 +5,6 @@
 namespace FluentErrors.Extensions;
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using FluentErrors.Errors;
 using FluentErrors.Validation;
