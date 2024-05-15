@@ -4,7 +4,7 @@
 
 namespace FluentErrors.Tests.Api;
 
-using System.Runtime.Serialization;
+using System.Runtime.CompilerServices;
 using FluentErrors.Api;
 using FluentErrors.Api.Models;
 using FluentErrors.Errors;
@@ -23,7 +23,7 @@ public class ErrorExtensionsTests
     public void ToErrorCode_VaryingException_ReturnsExpectedCode(Type errorType, int expected)
     {
         // Arrange
-        var ex = (Exception)FormatterServices.GetUninitializedObject(errorType);
+        var ex = (Exception)RuntimeHelpers.GetUninitializedObject(errorType);
 
         // Act
         var actual = ex.ToErrorCode();
