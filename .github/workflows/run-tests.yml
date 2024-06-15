@@ -24,7 +24,7 @@ jobs:
     - name: Build for release
       run: dotnet build -c Release
     - name: Generate raw coverage data
-      run: dotnet test -c Release -s .runsettings; dotnet reportgenerator -targetdir:coveragereport -reports:**/coverage.cobertura.xml -reporttypes:"html;jsonsummary;cobertura"
+      run: dotnet test -c Release -s .runsettings; dotnet reportgenerator -targetdir:coverage -reports:**/coverage.cobertura.xml -reporttypes:"html;jsonsummary;cobertura"
     - name: Send to coveralls
       continue-on-error: true
       uses: coverallsapp/github-action@v2
@@ -34,7 +34,7 @@ jobs:
         git-branch: main
     - name: Get coverage json
       id: getjson
-      run: echo COVERAGE_JSON=$(tr '\r\n' ' ' <coveragereport/Summary.json) >> $GITHUB_ENV
+      run: echo COVERAGE_JSON=$(tr '\r\n' ' ' <coverage/Summary.json) >> $GITHUB_ENV
     - name: Check coverage values
       id: check_coverage
       run: |
