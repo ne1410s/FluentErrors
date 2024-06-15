@@ -24,7 +24,7 @@ jobs:
     - name: Build for release
       run: dotnet build -c Release
     - name: Generate raw coverage data
-      run: dotnet test -c Release -s .runsettings; dotnet reportgenerator -targetdir:coverage -reports:**/coverage.cobertura.xml -reporttypes:"html;jsonsummary;cobertura"
+      run: dotnet test -c Release -s .runsettings; dotnet reportgenerator -targetdir:'${{ github.workspace }}/coverage' -reports:**/coverage.cobertura.xml -reporttypes:"html;jsonsummary;cobertura"
     - name: Send to coveralls
       continue-on-error: true
       uses: coverallsapp/github-action@v2
