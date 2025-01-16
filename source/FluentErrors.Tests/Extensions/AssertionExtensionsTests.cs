@@ -11,7 +11,7 @@ using FluentErrors.Tests.Validation;
 using FluentErrors.Validation;
 
 /// <summary>
-/// Tests for the <see cref="FluentErrors.Extensions.AssertionExtensions"/> class.
+/// Tests for the <see cref="AssertionExtensions"/> class.
 /// </summary>
 public class AssertionExtensionsTests
 {
@@ -25,7 +25,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBePopulated();
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBePopulated();
 
         // Assert
-        act.Should().ThrowExactly<DataStateException>();
+        _ = act.ShouldThrow<DataStateException>();
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBePopulated(message);
 
         // Assert
-        act.Should().Throw<Exception>().WithMessage(message);
+        act.ShouldThrow<Exception>().Message.ShouldBe(message);
     }
 
     [Fact]
@@ -65,7 +65,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBePopulated(unless: () => true);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBePopulated(unless: () => true);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -88,10 +88,10 @@ public class AssertionExtensionsTests
         const int testObj = default;
 
         // Act
-        var act = () => testObj.MustBePopulated();
+        Action act = () => testObj.MustBePopulated();
 
         // Assert
-        act.Should().ThrowExactly<DataStateException>();
+        _ = act.ShouldThrow<DataStateException>();
     }
 
     [Fact]
@@ -104,7 +104,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBePopulated();
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -117,7 +117,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBeUnpopulated();
 
         // Assert
-        act.Should().ThrowExactly<DataStateException>();
+        _ = act.ShouldThrow<DataStateException>();
     }
 
     [Fact]
@@ -131,7 +131,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBeUnpopulated(message);
 
         // Assert
-        act.Should().Throw<Exception>().WithMessage(message);
+        act.ShouldThrow<Exception>().Message.ShouldBe(message);
     }
 
     [Fact]
@@ -144,7 +144,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBeUnpopulated(unless: () => true);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -157,7 +157,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBeUnpopulated();
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -170,7 +170,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustBeUnpopulated(unless: () => true);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -184,7 +184,7 @@ public class AssertionExtensionsTests
         var act = () => object1.MustSerializeAs(object2);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -198,7 +198,7 @@ public class AssertionExtensionsTests
         var act = () => object1.MustSerializeAs(object2);
 
         // Assert
-        act.Should().Throw<DataStateException>();
+        _ = act.ShouldThrow<DataStateException>();
     }
 
     [Fact]
@@ -213,7 +213,7 @@ public class AssertionExtensionsTests
         var act = () => object1.MustSerializeAs(object2, message);
 
         // Assert
-        act.Should().Throw<DataStateException>().WithMessage(message);
+        act.ShouldThrow<DataStateException>().Message.ShouldBe(message);
     }
 
     [Fact]
@@ -227,7 +227,7 @@ public class AssertionExtensionsTests
         var act = () => object1.MustSerializeAs(object2, unless: () => true);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -241,7 +241,7 @@ public class AssertionExtensionsTests
         var act = () => object1.MustNotSerializeAs(object2);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -255,7 +255,7 @@ public class AssertionExtensionsTests
         var act = () => object1.MustNotSerializeAs(object2);
 
         // Assert
-        act.Should().Throw<DataStateException>();
+        _ = act.ShouldThrow<DataStateException>();
     }
 
     [Fact]
@@ -270,7 +270,7 @@ public class AssertionExtensionsTests
         var act = () => object1.MustNotSerializeAs(object2, message);
 
         // Assert
-        act.Should().Throw<DataStateException>().WithMessage(message);
+        act.ShouldThrow<DataStateException>().Message.ShouldBe(message);
     }
 
     [Fact]
@@ -284,7 +284,7 @@ public class AssertionExtensionsTests
         var act = () => object1.MustNotSerializeAs(object2, unless: () => true);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -297,7 +297,7 @@ public class AssertionExtensionsTests
         var act = () => value.MustBe(1 + 1);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -307,10 +307,10 @@ public class AssertionExtensionsTests
         const int value = 5;
 
         // Act
-        var act = () => value.MustBe(2 + 2);
+        Action act = () => value.MustBe(2 + 2);
 
         // Assert
-        act.Should().ThrowExactly<DataStateException>();
+        _ = act.ShouldThrow<DataStateException>();
     }
 
     [Fact]
@@ -321,10 +321,10 @@ public class AssertionExtensionsTests
         const string message = "no dice";
 
         // Act
-        var act = () => value.MustBe(2 + 2, message);
+        Action act = () => value.MustBe(2 + 2, message);
 
         // Assert
-        act.Should().ThrowExactly<DataStateException>().WithMessage(message);
+        act.ShouldThrow<DataStateException>().Message.ShouldBe(message);
     }
 
     [Fact]
@@ -337,7 +337,7 @@ public class AssertionExtensionsTests
         var act = () => value.MustBe(2 + 2, unless: () => true);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -351,7 +351,7 @@ public class AssertionExtensionsTests
         var act = () => date1.MustNotBe(date2);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -362,10 +362,10 @@ public class AssertionExtensionsTests
         var date2 = DateTime.Parse("1985/10/26", CultureInfo.InvariantCulture).Date.AddHours(0);
 
         // Act
-        var act = () => date1.MustNotBe(date2);
+        Action act = () => date1.MustNotBe(date2);
 
         // Assert
-        act.Should().ThrowExactly<DataStateException>();
+        _ = act.ShouldThrow<DataStateException>();
     }
 
     [Fact]
@@ -377,10 +377,10 @@ public class AssertionExtensionsTests
         const string message = "same, bro";
 
         // Act
-        var act = () => date1.MustNotBe(date2, message);
+        Action act = () => date1.MustNotBe(date2, message);
 
         // Assert
-        act.Should().ThrowExactly<DataStateException>().WithMessage(message);
+        act.ShouldThrow<DataStateException>().Message.ShouldBe(message);
     }
 
     [Fact]
@@ -394,7 +394,7 @@ public class AssertionExtensionsTests
         var act = () => date1.MustNotBe(date2, unless: () => true);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -408,7 +408,7 @@ public class AssertionExtensionsTests
         var act = () => model.MustAdhereTo(mockValidator.Object);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -417,7 +417,7 @@ public class AssertionExtensionsTests
         // Arrange
         var model = new TestModel();
         var mockValidator = new Mock<IItemValidator<TestModel>>();
-        mockValidator
+        _ = mockValidator
             .Setup(m => m.AssertValid(It.IsAny<TestModel>()))
             .Throws(new ValidatingException());
 
@@ -425,8 +425,8 @@ public class AssertionExtensionsTests
         var act = () => model.MustAdhereTo(mockValidator.Object);
 
         // Assert
-        act.Should().ThrowExactly<ValidatingException>()
-            .WithMessage("Invalid instance received.");
+        act.ShouldThrow<ValidatingException>()
+            .Message.ShouldBe("Invalid instance received.");
     }
 
     [Fact]
@@ -435,7 +435,7 @@ public class AssertionExtensionsTests
         // Arrange
         var model = new TestModel();
         var mockValidator = new Mock<IItemValidator<TestModel>>();
-        mockValidator
+        _ = mockValidator
             .Setup(m => m.AssertValid(It.IsAny<TestModel>()))
             .Throws(new ValidatingException());
 
@@ -443,7 +443,7 @@ public class AssertionExtensionsTests
         var act = () => model.MustAdhereTo(mockValidator.Object, () => true);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -456,7 +456,7 @@ public class AssertionExtensionsTests
         var act = () => model.MustAdhereTo(null!);
 
         // Assert
-        act.Should().ThrowExactly<ArgumentNullException>();
+        _ = act.ShouldThrow<ArgumentNullException>();
     }
 
     [Fact]
@@ -469,7 +469,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustExist();
 
         // Assert
-        act.Should().ThrowExactly<ResourceMissingException>();
+        _ = act.ShouldThrow<ResourceMissingException>();
     }
 
     [Fact]
@@ -479,10 +479,10 @@ public class AssertionExtensionsTests
         const int testVal = 0;
 
         // Act
-        var act = () => testVal.MustExist();
+        Action act = () => testVal.MustExist();
 
         // Assert
-        act.Should().ThrowExactly<ResourceMissingException>();
+        _ = act.ShouldThrow<ResourceMissingException>();
     }
 
     [Fact]
@@ -495,7 +495,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustExist();
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -505,10 +505,10 @@ public class AssertionExtensionsTests
         bool? testObj = null;
 
         // Act
-        var act = () => testObj.MustExist();
+        Action act = () => testObj.MustExist();
 
         // Assert
-        act.Should().Throw<Exception>().WithMessage("Resource not found");
+        act.ShouldThrow<Exception>().Message.ShouldBe("Resource not found");
     }
 
     [Fact]
@@ -519,10 +519,10 @@ public class AssertionExtensionsTests
         const string message = "just no";
 
         // Act
-        var act = () => testObj.MustExist(message);
+        Action act = () => testObj.MustExist(message);
 
         // Assert
-        act.Should().Throw<Exception>().WithMessage(message);
+        act.ShouldThrow<Exception>().Message.ShouldBe(message);
     }
 
     [Fact]
@@ -535,7 +535,7 @@ public class AssertionExtensionsTests
         var act = () => testObj.MustExist(unless: () => true);
 
         // Assert
-        act.Should().NotThrow();
+        _ = act.ShouldNotThrow();
     }
 
     [Fact]
@@ -548,7 +548,7 @@ public class AssertionExtensionsTests
         var act = () => isAllowed.MustBeAllowed();
 
         // Assert
-        act.Should().ThrowExactly<AuthorisationException>();
+        _ = act.ShouldThrow<AuthorisationException>();
     }
 
     [Fact]
@@ -561,7 +561,7 @@ public class AssertionExtensionsTests
         var act = () => isAllowed.MustBeAllowed();
 
         // Assert
-        act.Should().Throw<Exception>().WithMessage("Forbidden");
+        act.ShouldThrow<Exception>().Message.ShouldBe("Forbidden");
     }
 
     [Fact]
@@ -575,7 +575,7 @@ public class AssertionExtensionsTests
         var act = () => isAllowed.MustBeAllowed(message);
 
         // Assert
-        act.Should().Throw<Exception>().WithMessage(message);
+        act.ShouldThrow<Exception>().Message.ShouldBe(message);
     }
 
     [Fact]
@@ -588,7 +588,7 @@ public class AssertionExtensionsTests
         var act = () => isAllowed.MustBeAllowed(unless: () => true);
 
         // Assert
-        act.Should().NotThrow();
+        act.ShouldNotThrow();
     }
 
     [Fact]
@@ -601,6 +601,6 @@ public class AssertionExtensionsTests
         var act = () => isAllowed.MustBeAllowed();
 
         // Assert
-        act.Should().NotThrow();
+        act.ShouldNotThrow();
     }
 }

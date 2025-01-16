@@ -19,7 +19,7 @@ public class HttpErrorBodyTests
         var result = new HttpErrorBody(type, message);
 
         // Assert
-        result.Type.Should().Be(type);
-        result.Message.Should().Be(message);
+        result.Type.ShouldBe(type);
+        result.Message.ShouldBe(message);
     }
 }

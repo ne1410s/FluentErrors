@@ -29,7 +29,7 @@ public class ErrorExtensionsTests
         var actual = ex.ToErrorCode();
 
         // Assert
-        actual.Should().Be(expected);
+        actual.ShouldBe(expected);
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public class ErrorExtensionsTests
         var actual = ex.ToOutcome();
 
         // Assert
-        actual.Should().BeEquivalentTo(expected);
+        actual.ShouldBeEquivalentTo(expected);
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class ErrorExtensionsTests
         var actual = ex.ToOutcome();
 
         // Assert
-        actual.Should().BeEquivalentTo(expected);
+        actual.ShouldBeEquivalentTo(expected);
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class ErrorExtensionsTests
         var actual = ex.ToOutcome();
 
         // Assert
-        actual.Should().BeEquivalentTo(expected);
+        actual.ShouldBeEquivalentTo(expected);
     }
 
     [Fact]
@@ -91,6 +91,6 @@ public class ErrorExtensionsTests
         var act = nullException.ToOutcome;
 
         // Assert
-        act.Should().ThrowExactly<ArgumentNullException>();
+        _ = act.ShouldThrow<ArgumentNullException>();
     }
 }

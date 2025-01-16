@@ -20,8 +20,8 @@ public class InvalidItemTests
         var result = new InvalidItem(property, errorMessage, value);
 
         // Assert
-        result.Property.Should().Be(property);
-        result.ErrorMessage.Should().Be(errorMessage);
-        result.AttemptedValue.Should().Be(value);
+        result.Property.ShouldBe(property);
+        result.ErrorMessage.ShouldBe(errorMessage);
+        result.AttemptedValue.ShouldBe(value);
     }
 }

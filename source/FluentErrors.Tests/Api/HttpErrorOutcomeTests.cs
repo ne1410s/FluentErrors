@@ -19,7 +19,7 @@ public class HttpErrorOutcomeTests
         var result = new HttpErrorOutcome(errorCode, errorBody);
 
         // Assert
-        result.ErrorCode.Should().Be(1);
-        result.ErrorBody.Should().BeEquivalentTo(errorBody);
+        result.ErrorCode.ShouldBe(1);
+        result.ErrorBody.ShouldBeEquivalentTo(errorBody);
     }
 }

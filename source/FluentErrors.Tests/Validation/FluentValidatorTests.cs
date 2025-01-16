@@ -25,10 +25,10 @@ public class FluentValidatorTests
         var act = () => validator.AssertValid(model);
 
         // Assert
-        act.Should().ThrowExactly<ValidatingException>()
-            .WithMessage("Invalid instance received.")
-            .Which.InvalidItems
-            .Should().BeEquivalentTo(expectedItems);
+        act.ShouldThrow<ValidatingException>()
+            .ShouldSatisfyAllConditions(
+                ex => ex.Message.ShouldBe("Invalid instance received."),
+                ex => ex.InvalidItems.ShouldBeEquivalentTo(expectedItems));
     }
 
     [Fact]
@@ -42,6 +42,6 @@ public class FluentValidatorTests
         var act = () => validator.AssertValid(model);
 
         // Assert
-        act.Should().NotThrow();
+        act.ShouldNotThrow();
     }
 }
