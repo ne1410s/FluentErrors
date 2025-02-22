@@ -10,7 +10,7 @@ using FluentErrors.Errors;
 using FluentErrors.Extensions;
 
 /// <summary>
-/// Tests for the <see cref="HttpAssertionExtensionsTests"/> class.
+/// Tests for the <see cref="HttpAssertionExtensions"/> class.
 /// </summary>
 public class HttpAssertionExtensionsTests
 {
