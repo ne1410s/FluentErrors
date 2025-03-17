@@ -9,7 +9,6 @@ using FluentErrors.Errors;
 using FluentErrors.Extensions;
 using FluentErrors.Tests.Validation;
 using FluentErrors.Validation;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 
 /// <summary>
 /// Tests for the <see cref="AssertionExtensions"/> class.

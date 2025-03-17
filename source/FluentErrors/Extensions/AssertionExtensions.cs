@@ -101,24 +101,6 @@ public static class AssertionExtensions
     }
 
     /// <summary>
-    /// Asserts that a value must match the expected value.
-    /// </summary>
-    /// <typeparam name="T">The object type.</typeparam>
-    /// <param name="obj">The object.</param>
-    /// <param name="expected">The expected value.</param>
-    /// <param name="message">Used if the check fails.</param>
-    /// <param name="unless">Exemption criteria.</param>
-    /// <returns>The validated object, for call chaining.</returns>
-    /// <exception cref="DataStateException">Assertion failed.</exception>
-    public static T MustBe<T>(this T obj, T expected, string? message = null, Func<bool>? unless = null)
-        where T : struct
-    {
-        Equals(obj, expected).MustBeInGoodState(message, unless);
-        return obj;
-    }
-
-
-    /// <summary>
     /// Asserts that a string must not match the expected string.
     /// </summary>
     /// <param name="input">The input string.</param>
@@ -134,6 +116,23 @@ public static class AssertionExtensions
         var basis = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
         string.Equals(input, expected, basis).MustBe(false, message, unless);
         return input;
+    }
+
+    /// <summary>
+    /// Asserts that a value must match the expected value.
+    /// </summary>
+    /// <typeparam name="T">The object type.</typeparam>
+    /// <param name="obj">The object.</param>
+    /// <param name="expected">The expected value.</param>
+    /// <param name="message">Used if the check fails.</param>
+    /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated object, for call chaining.</returns>
+    /// <exception cref="DataStateException">Assertion failed.</exception>
+    public static T MustBe<T>(this T obj, T expected, string? message = null, Func<bool>? unless = null)
+        where T : struct
+    {
+        Equals(obj, expected).MustBeInGoodState(message, unless);
+        return obj;
     }
 
     /// <summary>
