@@ -117,6 +117,43 @@ public static class AssertionExtensions
         return obj;
     }
 
+
+    /// <summary>
+    /// Asserts that a string must not match the expected string.
+    /// </summary>
+    /// <param name="input">The input string.</param>
+    /// <param name="expected">The expected value.</param>
+    /// <param name="ignoreCase">Whether to include differences of case.</param>
+    /// <param name="message">Used if the check fails.</param>
+    /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated string, for call chaining.</returns>
+    /// <exception cref="DataStateException">Assertion failed.</exception>
+    public static string MustNotBe(
+        this string input, string expected, bool ignoreCase = false, string? message = null, Func<bool>? unless = null)
+    {
+        var basis = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+        string.Equals(input, expected, basis).MustBe(false, message, unless);
+        return input;
+    }
+
+    /// <summary>
+    /// Asserts that a string must match the expected string.
+    /// </summary>
+    /// <param name="input">The input string.</param>
+    /// <param name="expected">The expected value.</param>
+    /// <param name="ignoreCase">Whether to include differences of case.</param>
+    /// <param name="message">Used if the check fails.</param>
+    /// <param name="unless">Exemption criteria.</param>
+    /// <returns>The validated string, for call chaining.</returns>
+    /// <exception cref="DataStateException">Assertion failed.</exception>
+    public static string MustBe(
+        this string input, string expected, bool ignoreCase = false, string? message = null, Func<bool>? unless = null)
+    {
+        var basis = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+        string.Equals(input, expected, basis).MustBeInGoodState(message, unless);
+        return input;
+    }
+
     /// <summary>
     /// Asserts that an object passes the supplied validation criteria.
     /// </summary>

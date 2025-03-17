@@ -9,6 +9,7 @@ using FluentErrors.Errors;
 using FluentErrors.Extensions;
 using FluentErrors.Tests.Validation;
 using FluentErrors.Validation;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 
 /// <summary>
 /// Tests for the <see cref="AssertionExtensions"/> class.
@@ -395,6 +396,64 @@ public class AssertionExtensionsTests
 
         // Assert
         _ = act.ShouldNotThrow();
+    }
+
+    [Fact]
+    public void MustBe_DifferentCaseNotIgnored_ExceptionContainsMessage()
+    {
+        // Arrange
+        const string string1 = "hello";
+        const string string2 = "HeLLo";
+        const string message = "this unix yo";
+
+        // Act
+        Action act = () => string1.MustBe(string2, ignoreCase: false, message);
+
+        // Assert
+        act.ShouldThrow<DataStateException>().Message.ShouldBe(message);
+    }
+
+    [Fact]
+    public void MustBe_DifferentCaseIgnored_DoesNotThrow()
+    {
+        // Arrange
+        const string string1 = "hello";
+        const string string2 = "HeLLo";
+
+        // Act
+        Action act = () => string1.MustBe(string2, ignoreCase: true);
+
+        // Assert
+        act.ShouldNotThrow();
+    }
+
+    [Fact]
+    public void MustNotBe_DifferentCaseNotIgnored_DoesNotThrow()
+    {
+        // Arrange
+        const string string1 = "hello";
+        const string string2 = "HeLLo";
+
+        // Act
+        Action act = () => string1.MustNotBe(string2, ignoreCase: false);
+
+        // Assert
+        act.ShouldNotThrow();
+    }
+
+    [Fact]
+    public void MustNotBe_DifferentCaseIgnored_ExceptionContainsMessage()
+    {
+        // Arrange
+        const string string1 = "hello";
+        const string string2 = "HeLLo";
+        const string message = "this windows yo";
+
+        // Act
+        Action act = () => string1.MustNotBe(string2, ignoreCase: true, message);
+
+        // Assert
+        act.ShouldThrow<DataStateException>().Message.ShouldBe(message);
     }
 
     [Fact]
