@@ -62,7 +62,7 @@ public class HttpAssertionExtensionsTests
         var expectedMessage = $"Unexpected HTTP response status: {disallowed}";
 
         // Act
-        var act = () => stub.MustBeOk(disallowed: [204]);
+        var act = async () => await stub.MustBeOk(disallowed: [204]);
 
         // Assert
         var ex = await act.ShouldThrowAsync<HttpResponseException>();
@@ -76,7 +76,7 @@ public class HttpAssertionExtensionsTests
         using var stub = GetJsonStub(500);
 
         // Act
-        var act = () => stub.MustBeOk();
+        var act = async () => await stub.MustBeOk();
 
         // Assert
         (await act.ShouldThrowAsync<HttpResponseException>())
@@ -91,7 +91,7 @@ public class HttpAssertionExtensionsTests
         stub.Content = null;
 
         // Act
-        var act = () => stub.MustBeOk();
+        var act = async () => await stub.MustBeOk();
 
         // Assert
         (await act.ShouldThrowAsync<HttpResponseException>())
@@ -105,7 +105,7 @@ public class HttpAssertionExtensionsTests
         using var stub = GetStub(500);
 
         // Act
-        var act = () => stub.MustBeOk(unless: () => true);
+        var act = async () => await stub.MustBeOk(unless: () => true);
 
         // Assert
         await act.ShouldNotThrowAsync();
