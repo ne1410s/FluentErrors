@@ -22,10 +22,12 @@ public class FluentValidatorTests
         };
 
         // Act
-        var act = () => validator.AssertValid(model);
+        var act1 = () => validator.AssertValid(model);
+        var act2 = () => validator.AssertValid(model);
 
         // Assert
-        act.ShouldThrow<ValidatingException>()
+        act1.ShouldThrow<ValidatingException>();
+        act2.ShouldThrow<ValidatingException>()
             .ShouldSatisfyAllConditions(
                 ex => ex.Message.ShouldBe("Invalid instance received."),
                 ex => ex.InvalidItems.ShouldBeEquivalentTo(expectedItems));
